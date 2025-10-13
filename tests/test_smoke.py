@@ -111,11 +111,11 @@ def test_borrow_limit_bug():
     for i in range(3, 8):
         add_book_to_catalog(f"Book {i}", "Author", f"{i}" * 13, 1)
     # Borrow 5 books
-    for i in range(1, 6):
-        borrow_book_by_patron("111222", i)
+    for bid in [1, 3, 4, 5, 6]:
+        borrow_book_by_patron("111222", bid)
     # Try to borrow the 6th book, which should be fail
-    success, message = borrow_book_by_patron("111222", 6)
-    assert success == False, "This test should be fail providing the bug "
+    ok, _ = borrow_book_by_patron("111222", 7)
+    assert ok is False
 
 # Update: All the function are implemented
 # --- Tests for return_book_by_patron (R4) ---

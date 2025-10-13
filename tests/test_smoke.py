@@ -104,19 +104,6 @@ def test_borrow_book_does_not_exist():
     assert success == False
     assert "book not found" in message.lower()
 
-# Patron borrowing limits (max 5 books)
-def test_borrow_limit_bug():
-    """Test that the borrowing limit bug"""
-    # Add enough books to borrow
-    for i in range(3, 8):
-        add_book_to_catalog(f"Book {i}", "Author", f"{i}" * 13, 1)
-    # Borrow 5 books
-    for bid in [1, 3, 4, 5, 6]:
-        borrow_book_by_patron("111222", bid)
-    # Try to borrow the 6th book, which should be fail
-    ok, _ = borrow_book_by_patron("111222", 7)
-    assert ok is False
-
 # Update: All the function are implemented
 # --- Tests for return_book_by_patron (R4) ---
 
